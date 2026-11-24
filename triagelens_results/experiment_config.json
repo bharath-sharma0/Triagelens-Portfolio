@@ -1,0 +1,29 @@
+{
+  "project": "TriageLens",
+  "dataset": "CLINC150",
+  "primary_classifier": "TF-IDF + Logistic Regression",
+  "secondary_classifier": "LSA + Logistic Regression",
+  "trust_model": "StandardScaler + Logistic Regression",
+  "number_of_reliability_signals": 7,
+  "feature_columns": [
+    "confidence",
+    "tfidf_nn_similarity",
+    "knn_agreement",
+    "lsa_nn_similarity",
+    "lsa_knn_agreement",
+    "model_agreement_score",
+    "classifier_lsa_knn_match"
+  ],
+  "known_test_queries": 4500,
+  "oos_test_queries": 1000,
+  "assumed_oos_prevalence": 0.18,
+  "wrong_automation_cost": 10.0,
+  "human_review_cost": 1.0,
+  "confidence_threshold": 0.46229401762157496,
+  "trust_threshold": 0.8855429697098118,
+  "bootstrap_repetitions": 3000,
+  "random_seed": 42,
+  "threshold_selection": "Policy validation only",
+  "final_test_policy": "Frozen thresholds; no test refitting",
+  "relative_test_cost_savings_percent": 8.750878050270275
+}

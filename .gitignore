@@ -1,0 +1,12 @@
+__pycache__/
+.pytest_cache/
+.venv/
+.env
+.streamlit/secrets.toml
+/triagelens_models/*
+!/triagelens_models/*.joblib
+/triagelens_results/*
+!/triagelens_results/experiment_config.json
+!/triagelens_results/final_test_results.csv
+/data_full.json
+*.log

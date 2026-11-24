@@ -1,0 +1,111 @@
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>text</th>
+      <th>true_intent</th>
+      <th>predicted_intent</th>
+      <th>is_correct</th>
+      <th>confidence</th>
+      <th>tfidf_nn_similarity</th>
+      <th>knn_agreement</th>
+      <th>lsa_nn_similarity</th>
+      <th>lsa_knn_agreement</th>
+      <th>model_agreement_score</th>
+      <th>classifier_lsa_knn_match</th>
+      <th>is_oos</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>in spanish, meet me tomorrow is said how</td>
+      <td>translate</td>
+      <td>translate</td>
+      <td>True</td>
+      <td>0.071407</td>
+      <td>0.338957</td>
+      <td>0.824074</td>
+      <td>0.645028</td>
+      <td>0.813637</td>
+      <td>-0.288220</td>
+      <td>0</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>in french, how do i say, see you later</td>
+      <td>translate</td>
+      <td>translate</td>
+      <td>True</td>
+      <td>0.466696</td>
+      <td>0.673795</td>
+      <td>0.629005</td>
+      <td>0.716442</td>
+      <td>0.811632</td>
+      <td>-0.174094</td>
+      <td>1</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>how do you say hello in japanese</td>
+      <td>translate</td>
+      <td>translate</td>
+      <td>True</td>
+      <td>0.656154</td>
+      <td>0.729384</td>
+      <td>1.000000</td>
+      <td>0.970265</td>
+      <td>1.000000</td>
+      <td>-0.278161</td>
+      <td>1</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>how do i ask about the weather in chinese</td>
+      <td>translate</td>
+      <td>weather</td>
+      <td>False</td>
+      <td>0.158982</td>
+      <td>0.394555</td>
+      <td>1.000000</td>
+      <td>0.788884</td>
+      <td>1.000000</td>
+      <td>-0.371307</td>
+      <td>1</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>how can i say "cancel my order" in french</td>
+      <td>translate</td>
+      <td>translate</td>
+      <td>True</td>
+      <td>0.243595</td>
+      <td>0.336657</td>
+      <td>1.000000</td>
+      <td>0.647539</td>
+      <td>0.781839</td>
+      <td>-0.234252</td>
+      <td>1</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div>

@@ -1,0 +1,397 @@
+[
+  {
+    "cell": 0,
+    "output": 0,
+    "text": "Python version: 3.12.7\nNumPy: 1.26.4\nPandas: 2.2.2\nSciPy: 1.13.1\nScikit-learn: 1.5.1\nMatplotlib: 3.9.2\n\nEnvironment setup successful!\n"
+  },
+  {
+    "cell": 1,
+    "output": 0,
+    "text": "PyTorch version: 2.14.1+cpu\nTransformers version: 5.21.0\nSentence Transformers version: 6.2.0\n\nAll transformer libraries imported successfully!\nCUDA available: False\n"
+  },
+  {
+    "cell": 2,
+    "output": 0,
+    "text": "Dataset loaded successfully!\nFile: [local user folder]\\OneDrive\\Documents\\data_full.json\nAvailable sections: ['oos_val', 'val', 'train', 'oos_test', 'test', 'oos_train']\n"
+  },
+  {
+    "cell": 3,
+    "output": 0,
+    "text": "CLINC150 Dataset Overview\n---------------------------------------------\noos_val      : 100 samples\nval          : 3,000 samples\ntrain        : 15,000 samples\noos_test     : 1,000 samples\ntest         : 4,500 samples\noos_train    : 100 samples\n---------------------------------------------\nTotal samples: 23,700\n"
+  },
+  {
+    "cell": 4,
+    "output": 0,
+    "text": "Training data shape: (15000, 2)\n"
+  },
+  {
+    "cell": 4,
+    "output": 1,
+    "text": "                                                    text       intent\n11499  should i get any vaccines before going over to...     vaccines\n6475   i am going to go ahead and pair this with my n...  sync_device\n13167                    please play my taylor swift mix   play_music\n862    would it be possible to make a pto request for...  pto_request\n5970                 i need to know the date in 256 days         date"
+  },
+  {
+    "cell": 5,
+    "output": 0,
+    "text": "Number of known intent classes: 150\n\nExamples per class:\ncount    150.0\nmean     100.0\nstd        0.0\nmin      100.0\n25%      100.0\n50%      100.0\n75%      100.0\nmax      100.0\nName: count, dtype: float64\n\nMinimum examples: 100\nMaximum examples: 100\n"
+  },
+  {
+    "cell": 6,
+    "output": 0,
+    "text": "Missing values:\ntext      0\nintent    0\ndtype: int64\n\nEmpty text fields: 0\nDuplicate records: 0\nTexts with conflicting intent labels: 0\n"
+  },
+  {
+    "cell": 7,
+    "output": 0,
+    "text": "TF-IDF transformation completed!\nTraining matrix shape: (15000, 30848)\nValidation matrix shape: (3000, 30848)\nVocabulary size: 30848\n"
+  },
+  {
+    "cell": 8,
+    "output": 0,
+    "text": "Baseline model trained successfully!\nTraining time: 26.55 seconds\nNumber of learned classes: 150\n"
+  },
+  {
+    "cell": 9,
+    "output": 0,
+    "text": "BASELINE MODEL - VALIDATION RESULTS\n---------------------------------------------\nAccuracy    : 0.8833\nMacro-F1    : 0.8826\nWeighted-F1 : 0.8826\n---------------------------------------------\n\n10 intents with the lowest F1 scores:\n"
+  },
+  {
+    "cell": 9,
+    "output": 1,
+    "text": "                    precision  recall  f1-score  support\nchange_user_name     0.818182    0.45  0.580645     20.0\ncancel               0.769231    0.50  0.606061     20.0\ndistance             0.909091    0.50  0.645161     20.0\nmaybe                0.551724    0.80  0.653061     20.0\ncurrent_location     0.722222    0.65  0.684211     20.0\nuser_name            0.586207    0.85  0.693878     20.0\ntravel_suggestion    0.764706    0.65  0.702703     20.0\npayday               0.857143    0.60  0.705882     20.0\norder                1.000000    0.55  0.709677     20.0\ncancel_reservation   0.653846    0.85  0.739130     20.0"
+  },
+  {
+    "cell": 10,
+    "output": 0,
+    "text": "VALIDATION ERROR ANALYSIS\n---------------------------------------------\nTotal queries: 3000\nCorrect predictions: 2650\nIncorrect predictions: 350\n\nSample incorrectly classified queries:\n"
+  },
+  {
+    "cell": 10,
+    "output": 1,
+    "text": "                                                   text                intent  \\\n1243  i'd like to book the next availability for an ...  schedule_maintenance   \n2922                 since i ran out , order more bread                 order   \n2699        how much gas does it take to get to jackson                   gas   \n2000    on what day, month and year did i get new tires      last_maintenance   \n1223      let me know how many vacation have i utilized              pto_used   \n2256                                 don't talk anymore                cancel   \n2595                   give arianna my current location        share_location   \n1934                thank you for chatting with me, bye               goodbye   \n2321  where is the closest red lobster to my locatio...            directions   \n1516            please change my account to another one         change_accent   \n\n      predicted_intent  \n1243   oil_change_when  \n2922      order_checks  \n2699          distance  \n2000       tire_change  \n1223       pto_balance  \n2256             maybe  \n2595  current_location  \n1934         thank_you  \n2321  current_location  \n1516          transfer  "
+  },
+  {
+    "cell": 11,
+    "output": 0,
+    "text": "TOP 10 MOST COMMON INTENT CONFUSIONS\n---------------------------------------------\n"
+  },
+  {
+    "cell": 11,
+    "output": 1,
+    "text": "               intent           predicted_intent  error_count\n39   change_user_name                  user_name            8\n95          insurance           insurance_change            7\n185             taxes                     income            5\n88    how_old_are_you         where_are_you_from            5\n35    change_language               change_speed            4\n134      order_status  replacement_card_duration            4\n23             cancel         cancel_reservation            4\n51   current_location             share_location            4\n169      report_fraud               damaged_card            4\n45       credit_limit            rewards_balance            3"
+  },
+  {
+    "cell": 12,
+    "output": 0,
+    "text": "CLASSIFIER CONFIDENCE ANALYSIS\n---------------------------------------------\nMean confidence (correct): 0.4545\nMean confidence (incorrect): 0.1541\nHighest confidence among mistakes: 0.8679\n\nTop 10 highest-confidence mistakes:\n"
+  },
+  {
+    "cell": 12,
+    "output": 1,
+    "text": "                                                text                intent  \\\n1011                        what is on my to do list              reminder   \n685       how much money have i spent on restaurants          transactions   \n991                 erase the items on my to do list      todo_list_update   \n2525              did i add salt to my shopping list         shopping_list   \n2595                give arianna my current location        share_location   \n2064   there's something fishy on my card, report it          report_fraud   \n2464                how do i increse my credit limit   credit_limit_change   \n2803                        were you born in the 80s       how_old_are_you   \n2534  did i remember to add milk to my shopping list         shopping_list   \n181                   what will help my credit score  improve_credit_score   \n\n          predicted_intent  confidence  \n1011             todo_list    0.867856  \n685       spending_history    0.841788  \n991              todo_list    0.661022  \n2525  shopping_list_update    0.636827  \n2595      current_location    0.575498  \n2064          damaged_card    0.561383  \n2464          credit_limit    0.557247  \n2803    where_are_you_from    0.533254  \n2534  shopping_list_update    0.526273  \n181           credit_score    0.515052  "
+  },
+  {
+    "cell": 13,
+    "output": 0,
+    "text": "<Figure size 1000x500 with 1 Axes>"
+  },
+  {
+    "cell": 14,
+    "output": 0,
+    "text": "CONFIDENCE THRESHOLD ANALYSIS\n----------------------------------------\nThreshold: 0.5\nTotal incorrect predictions: 350\nIncorrect predictions above threshold: 15\nPercentage of mistakes above threshold: 4.29%\nAutomation coverage: 39.47%\nError rate among accepted queries: 1.27%\n"
+  },
+  {
+    "cell": 15,
+    "output": 0,
+    "text": "TF-IDF nearest-neighbor similarity completed!\n--------------------------------------------------\nMean similarity (correct): 0.5907\nMean similarity (incorrect): 0.4716\n\nExample nearest-neighbor matches:\n"
+  },
+  {
+    "cell": 15,
+    "output": 1,
+    "text": "                                                   text               intent  \\\n1801                     who is your supervisor, please  who_do_you_work_for   \n1190                   let me know what today's date is                 date   \n1817                   provide me the name of your boss  who_do_you_work_for   \n251                        when did i get my check last               payday   \n2505  i want to find a round trip flight from denver...          book_flight   \n1117       how many grams of sodium are in potato chips       nutrition_info   \n1411       i have a card that was lost i need to report     report_lost_card   \n2113                            set all doors to locked           smart_home   \n\n            predicted_intent  tfidf_nn_similarity  \\\n1801     who_do_you_work_for             0.614865   \n1190                    date             0.741000   \n1817     who_do_you_work_for             0.758859   \n251         last_maintenance             0.673079   \n2505             book_flight             0.351951   \n1117  measurement_conversion             0.346676   \n1411        report_lost_card             0.427794   \n2113              smart_home             0.587025   \n\n                                  nearest_training_text  \\\n1801                               am i your supervisor   \n1190          i would like to know what today's date is   \n1817                      what is the name of your boss   \n251                     when did i get my last paycheck   \n2505  book a flight from denver to austin on the 16t...   \n1117  what is the total number of calories in a bag ...   \n1411                       i need to report a lost card   \n2113                     make sure all doors are locked   \n\n     nearest_training_intent  \n1801     who_do_you_work_for  \n1190                    date  \n1817     who_do_you_work_for  \n251                   payday  \n2505             book_flight  \n1117                calories  \n1411        report_lost_card  \n2113              smart_home  "
+  },
+  {
+    "cell": 16,
+    "output": 0,
+    "text": "KNN AGREEMENT ANALYSIS\n---------------------------------------------\nMean agreement (correct): 0.8147\nMean agreement (incorrect): 0.563\nClassifier-neighbor match rate: 82.53%\n\nSample results:\n"
+  },
+  {
+    "cell": 16,
+    "output": 1,
+    "text": "                                                   text                intent  \\\n1801                     who is your supervisor, please   who_do_you_work_for   \n1190                   let me know what today's date is                  date   \n1817                   provide me the name of your boss   who_do_you_work_for   \n251                        when did i get my check last                payday   \n2505  i want to find a round trip flight from denver...           book_flight   \n1117       how many grams of sodium are in potato chips        nutrition_info   \n1411       i have a card that was lost i need to report      report_lost_card   \n2113                            set all doors to locked            smart_home   \n408            i have no oranges, put them onto my list  shopping_list_update   \n2579  could you tell me the amount owed on gas and e...          bill_balance   \n\n            predicted_intent  knn_majority_intent  knn_agreement  \\\n1801     who_do_you_work_for  who_do_you_work_for       0.816657   \n1190                    date                 date       1.000000   \n1817     who_do_you_work_for  who_do_you_work_for       0.834200   \n251         last_maintenance               payday       0.440418   \n2505             book_flight          book_flight       0.633374   \n1117  measurement_conversion     ingredients_list       0.578021   \n1411        report_lost_card     report_lost_card       1.000000   \n2113              smart_home           smart_home       1.000000   \n408     shopping_list_update                maybe       0.399891   \n2579                     gas                  gas       0.818114   \n\n      knn_matches_classifier  \n1801                    True  \n1190                    True  \n1817                    True  \n251                    False  \n2505                    True  \n1117                   False  \n1411                    True  \n2113                    True  \n408                    False  \n2579                    True  "
+  },
+  {
+    "cell": 17,
+    "output": 0,
+    "text": "LSA embedding generation completed!\n---------------------------------------------\nOriginal TF-IDF shape: (15000, 30848)\nLSA training shape: (15000, 300)\nLSA validation shape: (3000, 300)\nExplained variance ratio: 0.333\n"
+  },
+  {
+    "cell": 18,
+    "output": 0,
+    "text": "LSA NEAREST-NEIGHBOR ANALYSIS\n--------------------------------------------------\nMean LSA similarity (correct): 0.8553\nMean LSA similarity (incorrect): 0.7908\n\nSample nearest-neighbor matches:\n"
+  },
+  {
+    "cell": 18,
+    "output": 1,
+    "text": "                                                   text               intent  \\\n1801                     who is your supervisor, please  who_do_you_work_for   \n1190                   let me know what today's date is                 date   \n1817                   provide me the name of your boss  who_do_you_work_for   \n251                        when did i get my check last               payday   \n2505  i want to find a round trip flight from denver...          book_flight   \n1117       how many grams of sodium are in potato chips       nutrition_info   \n1411       i have a card that was lost i need to report     report_lost_card   \n2113                            set all doors to locked           smart_home   \n\n            predicted_intent  lsa_nn_similarity  \\\n1801     who_do_you_work_for           0.949229   \n1190                    date           0.757585   \n1817     who_do_you_work_for           0.821706   \n251         last_maintenance           0.833694   \n2505             book_flight           0.788918   \n1117  measurement_conversion           0.951312   \n1411        report_lost_card           0.834141   \n2113              smart_home           0.714260   \n\n                                       nearest_lsa_text  \\\n1801                                who is your manager   \n1190                let me know what i have to do today   \n1817                      what is the name of your boss   \n251                     when did i get my last paycheck   \n2505  i want to book a flight reservation from texas...   \n1117                       how many ounces are in a cup   \n1411                       i need to report a lost card   \n2113                              set temperature to 75   \n\n          nearest_lsa_intent  \n1801     who_do_you_work_for  \n1190               todo_list  \n1817     who_do_you_work_for  \n251                   payday  \n2505             book_flight  \n1117  measurement_conversion  \n1411        report_lost_card  \n2113              smart_home  "
+  },
+  {
+    "cell": 19,
+    "output": 0,
+    "text": "LSA KNN AGREEMENT ANALYSIS\n---------------------------------------------\nMean agreement (correct): 0.8189\nMean agreement (incorrect): 0.5761\nClassifier-neighbor match rate: 80.77%\n\nSample results:\n"
+  },
+  {
+    "cell": 19,
+    "output": 1,
+    "text": "                                                   text                intent  \\\n1801                     who is your supervisor, please   who_do_you_work_for   \n1190                   let me know what today's date is                  date   \n1817                   provide me the name of your boss   who_do_you_work_for   \n251                        when did i get my check last                payday   \n2505  i want to find a round trip flight from denver...           book_flight   \n1117       how many grams of sodium are in potato chips        nutrition_info   \n1411       i have a card that was lost i need to report      report_lost_card   \n2113                            set all doors to locked            smart_home   \n408            i have no oranges, put them onto my list  shopping_list_update   \n2579  could you tell me the amount owed on gas and e...          bill_balance   \n\n            predicted_intent lsa_knn_majority_intent  lsa_knn_agreement  \\\n1801     who_do_you_work_for     who_do_you_work_for           0.600000   \n1190                    date                    date           0.383300   \n1817     who_do_you_work_for     who_do_you_work_for           0.603530   \n251         last_maintenance        last_maintenance           0.779146   \n2505             book_flight             book_flight           1.000000   \n1117  measurement_conversion                spelling           0.799930   \n1411        report_lost_card        report_lost_card           0.612671   \n2113              smart_home              smart_home           1.000000   \n408     shopping_list_update                   maybe           1.000000   \n2579                     gas                     gas           0.822661   \n\n      lsa_knn_matches_classifier  \n1801                        True  \n1190                        True  \n1817                        True  \n251                         True  \n2505                        True  \n1117                       False  \n1411                        True  \n2113                        True  \n408                        False  \n2579                        True  "
+  },
+  {
+    "cell": 20,
+    "output": 0,
+    "text": "LSA CLASSIFIER TRAINING COMPLETED\n---------------------------------------------\nTraining time: 4.23 seconds\nNumber of classes: 150\n\nVALIDATION PERFORMANCE\n---------------------------------------------\nTF-IDF LR accuracy : 0.8833\nLSA LR accuracy    : 0.8307\n\nTF-IDF LR Macro-F1 : 0.8826\nLSA LR Macro-F1    : 0.8280\n\nAgreement between classifiers: 90.60%\n"
+  },
+  {
+    "cell": 21,
+    "output": 0,
+    "text": "MODEL DISAGREEMENT ANALYSIS\n---------------------------------------------\nMean JS distance (correct): 0.2110\nMean JS distance (incorrect): 0.2422\nError-detection AUROC: 0.5896\n\nTop 10 queries with highest model disagreement:\n"
+  },
+  {
+    "cell": 21,
+    "output": 1,
+    "text": "                                                   text              intent  \\\n2258                                            rescind              cancel   \n2378                                                 hi            greeting   \n932                                            approved                 yes   \n2549                     send message to carl, you suck                text   \n2546                     text mom saying happy birthday                text   \n2284  can i travel to south africa without getting a...            vaccines   \n1610                how are the fried chicken at zippys  restaurant_reviews   \n2928                order more paper towels from amazon               order   \n2078  is there anyway, i can report a suspicious act...        report_fraud   \n588                                       who makes you        who_made_you   \n\n        predicted_intent lsa_predicted_intent  correct  confidence  \\\n2258          definition           definition    False    0.026215   \n2378            greeting             greeting     True    0.120334   \n932   pto_request_status   pto_request_status    False    0.139640   \n2549                text                 text     True    0.160313   \n2546                text                 text     True    0.272638   \n2284            vaccines             vaccines     True    0.093658   \n1610  restaurant_reviews   restaurant_reviews     True    0.057439   \n2928               order         order_checks     True    0.094889   \n2078        report_fraud         report_fraud     True    0.150462   \n588         who_made_you         who_made_you     True    0.213150   \n\n      js_distance  \n2258     0.658434  \n2378     0.640144  \n932      0.610655  \n2549     0.587622  \n2546     0.582733  \n2284     0.578599  \n1610     0.551286  \n2928     0.547726  \n2078     0.546962  \n588      0.546312  "
+  },
+  {
+    "cell": 22,
+    "output": 0,
+    "text": "CLASSIFIER-LSA KNN AGREEMENT ANALYSIS\n--------------------------------------------------\nOverall match rate: 80.77%\nError rate when predictions MATCH: 6.81%\nError rate when predictions DISAGREE: 32.06%\nDisagreement error-detection AUROC: 0.6903\n\nExamples where classifier and LSA kNN disagree:\n"
+  },
+  {
+    "cell": 22,
+    "output": 1,
+    "text": "                                                   text        intent  \\\n690   please let me review all items on my mastercar...  transactions   \n2065        how do i report fraud on my chase bank card  report_fraud   \n2686              how many gallons of gas are in my car           gas   \n602               how long will the trip to portland be      distance   \n2189      can you tell me what my federal tax burden is         taxes   \n881                       how's my gas mileage in citys           mpg   \n976                           what plan am i paying for     insurance   \n179          i have a vacation request that i need made   pto_request   \n509   will i have enough to get a new roku with my s...       balance   \n1060                                           ill pass            no   \n\n     predicted_intent lsa_knn_majority_intent  lsa_knn_agreement  correct  \n690      transactions         rewards_balance           0.408030     True  \n2065     report_fraud         rewards_balance           0.614196     True  \n2686              gas                spelling           1.000000     True  \n602         cook_time                how_busy           0.409845    False  \n2189            taxes                  income           0.606162     True  \n881               mpg                     gas           1.000000     True  \n976         insurance        change_user_name           0.394619     True  \n179       pto_request      pto_request_status           1.000000     True  \n509           balance              pin_change           0.418190     True  \n1060          goodbye               next_song           0.809845    False  "
+  },
+  {
+    "cell": 23,
+    "output": 0,
+    "text": "SEVEN-SIGNAL FEATURE DATASET\n---------------------------------------------\nTotal validation queries: 3000\nNumber of reliability features: 7\n\nFeature names:\n1. confidence\n2. tfidf_nn_similarity\n3. knn_agreement\n4. lsa_nn_similarity\n5. lsa_knn_agreement\n6. model_agreement_score\n7. classifier_lsa_knn_match\n\nMissing feature values: 0\n\nSample feature records:\n"
+  },
+  {
+    "cell": 23,
+    "output": 1,
+    "text": "                                        text true_intent predicted_intent  \\\n0   in spanish, meet me tomorrow is said how   translate        translate   \n1     in french, how do i say, see you later   translate        translate   \n2           how do you say hello in japanese   translate        translate   \n3  how do i ask about the weather in chinese   translate          weather   \n4  how can i say \"cancel my order\" in french   translate        translate   \n\n   is_correct  confidence  tfidf_nn_similarity  knn_agreement  \\\n0        True    0.071407             0.338957       0.824074   \n1        True    0.466696             0.673795       0.629005   \n2        True    0.656154             0.729384       1.000000   \n3       False    0.158982             0.394555       1.000000   \n4        True    0.243595             0.336657       1.000000   \n\n   lsa_nn_similarity  lsa_knn_agreement  model_agreement_score  \\\n0           0.645028           0.813637              -0.288220   \n1           0.716442           0.811632              -0.174094   \n2           0.970265           1.000000              -0.278161   \n3           0.788884           1.000000              -0.371307   \n4           0.647539           0.781839              -0.234252   \n\n   classifier_lsa_knn_match  is_oos  \n0                         0   False  \n1                         1   False  \n2                         1   False  \n3                         1   False  \n4                         1   False  "
+  },
+  {
+    "cell": 23,
+    "output": 2,
+    "text": "\nFeature summary:\n"
+  },
+  {
+    "cell": 23,
+    "output": 3,
+    "text": "                              mean       std       min       max\nconfidence                0.419446  0.274405  0.013093  0.994168\ntfidf_nn_similarity       0.576801  0.165708  0.000000  1.000000\nknn_agreement             0.785319  0.238692  0.000000  1.000000\nlsa_nn_similarity         0.847802  0.118300  0.000000  1.000000\nlsa_knn_agreement         0.790545  0.249120  0.000000  1.000000\nmodel_agreement_score    -0.214622  0.109036 -0.658434 -0.011285\nclassifier_lsa_knn_match  0.807667  0.394199  0.000000  1.000000"
+  },
+  {
+    "cell": 24,
+    "output": 0,
+    "text": "OOS validation examples: 100\n\nOOS FEATURE EXTRACTION COMPLETED\n---------------------------------------------\nTotal OOS queries: 100\nReliability features: 7\nMissing feature values: 0\n\nAverage confidence for OOS queries:\n0.0936\n\nSample OOS predictions:\n"
+  },
+  {
+    "cell": 24,
+    "output": 1,
+    "text": "                                                text     predicted_intent  \\\n0  set a warning for when my bank account starts ...      account_blocked   \n1                                 a show on broadway         transactions   \n2                 who has the best record in the nfl         who_made_you   \n3                 how do i find the area of a circle               recipe   \n4                  how many onions do i have on hand          pto_balance   \n5             what is the name of the 13th president            what_song   \n6             show me recent activity in my backyard         transactions   \n7  how long will it take me to pay off my card if...             distance   \n8                     does our bank have free notary  travel_notification   \n9                what were the top stories this week   where_are_you_from   \n\n   confidence  tfidf_nn_similarity  lsa_nn_similarity  is_oos  \n0    0.098863             0.398302           0.722110    True  \n1    0.173414             0.399779           0.778876    True  \n2    0.043994             0.306717           0.609923    True  \n3    0.024040             0.415020           0.788869    True  \n4    0.065894             0.434549           0.860477    True  \n5    0.087060             0.517682           0.913062    True  \n6    0.144342             0.611306           0.813512    True  \n7    0.084051             0.405358           0.726390    True  \n8    0.020684             0.304344           0.729586    True  \n9    0.021784             0.431293           0.617963    True  "
+  },
+  {
+    "cell": 25,
+    "output": 0,
+    "text": "TRUST MODEL DATA PREPARATION\n--------------------------------------------------\nComplete validation set: 3100\nTrust training set: 1550\nPolicy validation set: 1550\n\nTrust training composition:\nKnown queries: 1500\nOOS queries: 50\nCorrect predictions: 1325\n\nPolicy validation composition:\nKnown queries: 1500\nOOS queries: 50\nCorrect predictions: 1325\n\nValidation split completed successfully!\n"
+  },
+  {
+    "cell": 26,
+    "output": 0,
+    "text": "LEARNED TRUST MODEL TRAINING COMPLETED\n--------------------------------------------------\nTraining examples: 1550\nReliability features: 7\nObserved training OOS prevalence: 3.23%\nWeighted training OOS prevalence: 18.00%\n\nPOLICY VALIDATION \u2014 WEIGHTED AUROC\n--------------------------------------------------\nConfidence-only AUROC: 0.8800\nSeven-signal trust AUROC: 0.8837\n\nTrust-score summary:\ncount    1550.0000\nmean        0.7827\nstd         0.2578\nmin         0.0723\n25%         0.6374\n50%         0.9075\n75%         0.9838\nmax         0.9985\nName: trust_score, dtype: float64\n\nSample trust predictions:\n"
+  },
+  {
+    "cell": 26,
+    "output": 1,
+    "text": "                                                text    predicted_intent  \\\n0      does boston restaurant have favorable reviews  restaurant_reviews   \n1              help me find the chase routing number             routing   \n2                         please set an alarm for me               alarm   \n3                     i need to report a stolen card    report_lost_card   \n4  i need you to text mickey saying 'can we resch...                text   \n5  list a few pizza places that have seating near...    current_location   \n6  i want to change my bank of america account pi...          pin_change   \n7        set my alarm for quarter after six tomorrow               alarm   \n8                      do you know london's timezone            timezone   \n9  please put a block on my us bank account immed...      freeze_account   \n\n   is_correct  is_oos  confidence  trust_score  \n0        True   False    0.351721     0.861456  \n1        True   False    0.673143     0.979953  \n2        True   False    0.959942     0.997550  \n3        True   False    0.705388     0.989952  \n4        True   False    0.181268     0.573392  \n5       False   False    0.100201     0.526575  \n6        True   False    0.750303     0.990714  \n7        True   False    0.534523     0.976135  \n8        True   False    0.313346     0.599678  \n9        True   False    0.742612     0.991421  "
+  },
+  {
+    "cell": 27,
+    "output": 0,
+    "text": "WEIGHTED RISK-COVERAGE COMPARISON\n-------------------------------------------------------\nAssumed OOS prevalence: 18%\n"
+  },
+  {
+    "cell": 27,
+    "output": 1,
+    "text": "  Target coverage Confidence coverage Confidence risk Trust coverage  \\\n0             20%              19.99%           2.35%         19.99%   \n1             40%              39.97%           4.26%         39.99%   \n2             60%              59.06%           6.70%         60.00%   \n3             80%              79.97%          15.03%         79.95%   \n\n  Trust risk  \n0      2.07%  \n1      2.40%  \n2      6.97%  \n3     15.63%  "
+  },
+  {
+    "cell": 27,
+    "output": 2,
+    "text": "<Figure size 900x600 with 1 Axes>"
+  },
+  {
+    "cell": 28,
+    "output": 0,
+    "text": "COST-SENSITIVE TRIAGE ANALYSIS\n--------------------------------------------------\nWrong automation cost: 10.0\nHuman review cost: 1.0\nAssumed OOS prevalence: 18%\n\nBEST POLICY FOR EACH METHOD\n"
+  },
+  {
+    "cell": 28,
+    "output": 2,
+    "text": "\nTrust cost change vs confidence: +9.89% savings\n"
+  },
+  {
+    "cell": 28,
+    "output": 3,
+    "text": "<Figure size 900x600 with 1 Axes>"
+  },
+  {
+    "cell": 29,
+    "output": 0,
+    "text": "FROZEN PRIMARY POLICY\n--------------------------------------------------\nConfidence threshold: 0.4623\nTrust threshold: 0.8855\nPrimary cost ratio: 10:1\nAssumed OOS prevalence: 18%\n\nCOST SENSITIVITY ANALYSIS\n--------------------------------------------------\n"
+  },
+  {
+    "cell": 29,
+    "output": 2,
+    "text": "\nNote: These are validation-optimized results, not final test performance.\n"
+  },
+  {
+    "cell": 30,
+    "output": 0,
+    "text": "FINAL TEST DATASET PREPARATION\n--------------------------------------------------\nKnown-intent test queries: 4500\nOOS test queries: 1000\nTotal test queries: 5500\nUnique known intents: 150\nObserved test OOS prevalence: 18.18%\n\nFROZEN PRIMARY POLICY\n--------------------------------------------------\nConfidence threshold: 0.4623\nTrust threshold: 0.8855\nWrong automation cost: 10\nHuman review cost: 1\nTarget OOS prevalence: 18%\n\nTest dataset prepared successfully!\n"
+  },
+  {
+    "cell": 31,
+    "output": 0,
+    "text": "Test TF-IDF shape: (5500, 30848)\nTest LSA shape: (5500, 300)\n\nFINAL TEST FEATURE EXTRACTION COMPLETED\n--------------------------------------------------\nTest examples: 5500\nReliability features: 7\nTrust scores generated: 5500\nMissing feature values: 0\n\nSample predictions and reliability scores:\n"
+  },
+  {
+    "cell": 31,
+    "output": 1,
+    "text": "                                   text predicted_intent  confidence  \\\n0      how would you say fly in italian        translate    0.373788   \n1     what's the spanish word for pasta        translate    0.033685   \n2   how would they say butter in zambia        translate    0.480840   \n3        how do you say fast in spanish        translate    0.785229   \n4   what's the word for trees in norway       definition    0.083735   \n5  how does one say wonderful in german        translate    0.120902   \n6       how do they say tacos in mexico        translate    0.450416   \n7    how would one say cruiser in china        translate    0.228374   \n\n   tfidf_nn_similarity  lsa_nn_similarity  trust_score  \n0             0.368763           0.898734     0.675866  \n1             0.417586           0.911503     0.208386  \n2             0.606528           0.951037     0.969660  \n3             0.671090           0.992086     0.987933  \n4             0.517789           0.856186     0.354280  \n5             0.601657           0.667183     0.754697  \n6             0.487335           0.985066     0.933279  \n7             0.374166           0.748007     0.794346  "
+  },
+  {
+    "cell": 32,
+    "output": 0,
+    "text": "FINAL FROZEN TEST EVALUATION\n=======================================================\nTest examples: 5500\nObserved OOS prevalence: 18.18%\nWeighted OOS prevalence: 18.00%\nWrong automation cost: 10\nHuman review cost: 1\n\nFINAL POLICY COMPARISON\n-------------------------------------------------------\n"
+  },
+  {
+    "cell": 32,
+    "output": 2,
+    "text": "\nFINAL COST COMPARISON\n-------------------------------------------------------\nConfidence-only expected cost: 0.7276\nSeven-signal expected cost: 0.6639\nAbsolute cost reduction: +0.0637\nRelative trust-model savings: +8.75%\n\nPositive savings favor the trust model; negative savings favor confidence-only triage.\n"
+  },
+  {
+    "cell": 33,
+    "output": 0,
+    "text": "PAIRED STRATIFIED BOOTSTRAP ANALYSIS\n=======================================================\nBootstrap repetitions: 3000\nKnown-intent examples: 4500\nOOS examples: 1000\nAssumed OOS prevalence: 18%\n\n95% CONFIDENCE INTERVALS\n-------------------------------------------------------\n"
+  },
+  {
+    "cell": 33,
+    "output": 2,
+    "text": "\nCOST REDUCTION INTERPRETATION\n-------------------------------------------------------\nThe 95% bootstrap CI for absolute cost savings is entirely above zero.\n\nPositive cost savings favor TriageLens. Positive risk or leakage changes indicate an increase under TriageLens.\n"
+  },
+  {
+    "cell": 34,
+    "output": 0,
+    "text": "FEATURE ABLATION STUDY\n=======================================================\nTraining dataset: 1550\nValidation dataset: 1550\nAssumed OOS prevalence: 18%\n\nOriginal seven-signal AUROC: 0.8837\n"
+  },
+  {
+    "cell": 34,
+    "output": 2,
+    "text": "\nINTERPRETATION\n-------------------------------------------------------\nNegative change: configuration performs worse than the full model.\nPositive change: configuration performs better than the full model.\n\nThis is an exploratory validation ablation, not a new final test evaluation.\n"
+  },
+  {
+    "cell": 35,
+    "output": 0,
+    "text": "WEIGHTED CALIBRATION ANALYSIS\n==================================================\nPolicy-validation queries: 1550\nAssumed OOS prevalence: 18%\n\nCalibration comparison:\n"
+  },
+  {
+    "cell": 35,
+    "output": 1,
+    "text": "                      Method  Weighted Brier score  Weighted ECE\n0  Raw classifier confidence                0.2819        0.3694\n1         Seven-signal trust                0.1197        0.0395"
+  },
+  {
+    "cell": 35,
+    "output": 2,
+    "text": "\nSeven-signal trust calibration bins:\n"
+  },
+  {
+    "cell": 35,
+    "output": 3,
+    "text": "       Bin  Count  Weight fraction  Mean predicted  Observed correctness  \\\n0  0.0-0.1      4           0.0052          0.0871                0.0000   \n1  0.1-0.2     52           0.0620          0.1555                0.1675   \n2  0.2-0.3     73           0.0857          0.2479                0.2041   \n3  0.3-0.4     85           0.0678          0.3530                0.4432   \n4  0.4-0.5     74           0.0435          0.4501                0.6408   \n5  0.5-0.6     73           0.0491          0.5490                0.5571   \n6  0.6-0.7     77           0.0574          0.6419                0.5623   \n7  0.7-0.8    114           0.0654          0.7543                0.8279   \n8  0.8-0.9    200           0.1246          0.8526                0.7766   \n9  0.9-1.0    798           0.4393          0.9723                0.9744   \n\n   Calibration gap  \n0           0.0871  \n1           0.0120  \n2           0.0438  \n3           0.0902  \n4           0.1907  \n5           0.0081  \n6           0.0796  \n7           0.0735  \n8           0.0760  \n9           0.0020  "
+  },
+  {
+    "cell": 35,
+    "output": 4,
+    "text": "<Figure size 800x600 with 1 Axes>"
+  },
+  {
+    "cell": 36,
+    "output": 0,
+    "text": "FINAL CALIBRATION AUDIT\n==================================================\n"
+  },
+  {
+    "cell": 36,
+    "output": 1,
+    "text": "             Dataset              Method   Brier     ECE\n0  Policy validation      Raw confidence  0.2819  0.3694\n1  Policy validation  Seven-signal trust  0.1197  0.0395\n2         Final test      Raw confidence  0.2714  0.3643\n3         Final test  Seven-signal trust  0.1076  0.0184"
+  },
+  {
+    "cell": 36,
+    "output": 2,
+    "text": "\nFROZEN TRUST POLICY \u2014 ACCEPTED QUERIES\n--------------------------------------------------\nFrozen trust threshold: 0.8855\nWeighted mean predicted correctness: 96.83%\nWeighted observed correctness: 96.96%\nCalibration gap: -0.13 percentage points\n\nPositive gap = overconfidence; negative gap = underconfidence.\n\nDiagnostic only: no model or threshold changes.\n"
+  },
+  {
+    "cell": 37,
+    "output": 0,
+    "text": "Saved: triagelens_results\\final_test_results.csv\nSaved: triagelens_results\\bootstrap_confidence_intervals.csv\nSaved: triagelens_results\\feature_ablation.csv\nSaved: triagelens_results\\calibration_results.csv\nSaved: triagelens_results\\cost_sensitivity.csv\nSaved: triagelens_results\\experiment_config.json\n\nRESEARCH EXPORT SUMMARY\n--------------------------------------------------\nTotal files saved: 6\nOutput directory: [local user folder]\\triagelens_results\n- bootstrap_confidence_intervals.csv\n- calibration_results.csv\n- cost_sensitivity.csv\n- experiment_config.json\n- feature_ablation.csv\n- final_test_results.csv\n\nResearch results exported successfully!\n"
+  },
+  {
+    "cell": 38,
+    "output": 0,
+    "text": "Saved: tfidf_vectorizer.joblib\nSaved: primary_classifier.joblib\nSaved: lsa_transformer.joblib\nSaved: lsa_classifier.joblib\nSaved: trust_model.joblib\nSaved: training_tfidf.joblib\nSaved: training_lsa.joblib\nSaved: training_labels.joblib\nSaved: feature_columns.joblib\n\nMODEL EXPORT SUMMARY\n--------------------------------------------------\nTotal model files: 9\nModel directory: [local user folder]\\triagelens_models\n- feature_columns.joblib\n- lsa_classifier.joblib\n- lsa_transformer.joblib\n- primary_classifier.joblib\n- tfidf_vectorizer.joblib\n- training_labels.joblib\n- training_lsa.joblib\n- training_tfidf.joblib\n- trust_model.joblib\n\nAll trained models saved successfully!\n"
+  },
+  {
+    "cell": 39,
+    "output": 0,
+    "text": "Loaded: tfidf_vectorizer.joblib\nLoaded: primary_classifier.joblib\nLoaded: lsa_transformer.joblib\nLoaded: lsa_classifier.joblib\nLoaded: trust_model.joblib\nLoaded: training_tfidf.joblib\nLoaded: training_lsa.joblib\nLoaded: training_labels.joblib\nLoaded: feature_columns.joblib\n\nMODEL RELOAD VERIFICATION\n--------------------------------------------------\nTotal components loaded: 9\nPrimary predictions match: True\nTrust scores match: True\nTraining reference data valid: True\n\nSUCCESS: Saved models verified!\n"
+  },
+  {
+    "cell": 40,
+    "output": 0,
+    "text": "TRIAGELENS ENVIRONMENT RECORD\n==================================================\nPython version: 3.12.7\n\nInstalled package versions:\nnumpy                 : 1.26.4\npandas                : 2.2.2\nscipy                 : 1.13.1\nscikit-learn          : 1.5.1\nmatplotlib            : 3.9.2\njoblib                : 1.4.2\njupyter               : 1.0.0\nipykernel             : 6.28.0\ntorch                 : 2.14.1\ntransformers          : 5.21.0\nsentence-transformers : 6.2.0\nstreamlit             : 1.37.1\n\nFiles saved:\n- [local user folder]\\triagelens_results\\environment_versions.json\n- [local user folder]\\triagelens_results\\requirements.txt\n\nEnvironment information saved successfully!\n"
+  },
+  {
+    "cell": 41,
+    "output": 0,
+    "text": "TRIAGELENS INFERENCE RESULT\n==================================================\nQuery: How can I change the PIN on my debit card?\nPredicted intent: pin_change\nClassifier confidence: 0.2960\nLearned trust score: 0.8877\nConfidence-only decision: HUMAN REVIEW\nTriageLens decision: AUTOMATE\n\nSEVEN RELIABILITY SIGNALS\n--------------------------------------------------\nconfidence                      : 0.2960\ntfidf_nn_similarity             : 0.4474\nknn_agreement                   : 0.7961\nlsa_nn_similarity               : 0.7750\nlsa_knn_agreement               : 1.0000\nmodel_agreement_score           : -0.2595\nclassifier_lsa_knn_match        : 1.0000\n"
+  },
+  {
+    "cell": 42,
+    "output": 0,
+    "text": "Enter your query for TriageLens:  I need to report my stolen credit card\n"
+  },
+  {
+    "cell": 42,
+    "output": 1,
+    "text": "\nTRIAGELENS INTERACTIVE PREDICTION\n=======================================================\nQuery: I need to report my stolen credit card\nPredicted intent: report_lost_card\n\nClassifier confidence: 0.7056\nLearned trust score: 0.9894\n\nDECISION COMPARISON\n-------------------------------------------------------\nConfidence-only: AUTOMATE\nTriageLens: AUTOMATE\n\nTrust threshold margin: +0.1038\n\nSEVEN RELIABILITY SIGNALS\n-------------------------------------------------------\n"
+  },
+  {
+    "cell": 43,
+    "output": 0,
+    "text": "Writing triagelens_inference.py\n"
+  },
+  {
+    "cell": 44,
+    "output": 0,
+    "text": "TriageLens models loaded successfully!\n\nTRIAGELENS MODULE VERIFICATION\n=======================================================\n\nQuery: How can I change the PIN on my debit card?\nPredicted intent: pin_change\nClassifier confidence: 0.296\nTrust score: 0.8877\nTriageLens decision: AUTOMATE\nAll seven signals match: True\nVerification passed: True\n\nQuery: I need to report my stolen credit card\nPredicted intent: report_lost_card\nClassifier confidence: 0.7056\nTrust score: 0.9894\nTriageLens decision: AUTOMATE\nAll seven signals match: True\nVerification passed: True\n\nQuery: Please cancel my flight reservation\nPredicted intent: cancel_reservation\nClassifier confidence: 0.5946\nTrust score: 0.9785\nTriageLens decision: AUTOMATE\nAll seven signals match: True\nVerification passed: True\n\nFINAL VERIFICATION\n=======================================================\nSUCCESS: All predictions and scores match!\nTriageLens inference module is verified.\n"
+  },
+  {
+    "cell": 45,
+    "output": 0,
+    "text": "Writing triagelens_app.py\n"
+  },
+  {
+    "cell": 46,
+    "output": 0,
+    "text": "Jupyter Python version: 3.12.7\nJupyter Python executable: [local user folder]\\anaconda3\\python.exe\n"
+  }
+]
