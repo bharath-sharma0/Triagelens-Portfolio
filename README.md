@@ -1,6 +1,10 @@
-# TriageLens — [**Try the live Streamlit demo**](https://triagelens-portfolio-cudxhgqfsks5j2gjabkf2u.streamlit.app/)
+# TriageLens
 
-A Streamlit research dashboard for exploring when an intent classifier should accept a prediction or defer it for review.
+A Streamlit dashboard that shows when an intent classifier accepts a prediction or sends it for review.
+
+[**Try the live demo**](https://triagelens-portfolio-cudxhgqfsks5j2gjabkf2u.streamlit.app/)
+
+**Held-out result:** The seven-signal policy reduced modeled cost by 8.75% compared with the confidence-only baseline under the study’s cost assumptions.
 
 ![TriageLens dashboard analyzing a query](docs/live-prediction.png)
 
